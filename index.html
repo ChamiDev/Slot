@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=none">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Chami">
+    <meta name="description" content="Casino de Chai">
+    <link rel="icon" href="https://um2410.renderforest.com/u25148551/visuals/46a17da3-ac58-4e06-b88e-25cbec67334a.gif" type="image/gif">
+    <title>Casino Chai</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+
+  <!-- Firebase App (Core) -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
+  <!-- Firebase Authentication -->
+  <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+
+  <script>
+    // Configuración de Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyA7OK0Qx0yGB19WwK7jh4e14ii3LwGVJLY",
+      authDomain: "slots-chai.firebaseapp.com",
+      projectId: "slots-chai",
+      storageBucket: "slots-chai.appspot.com",
+      messagingSenderId: "255447420234",
+      appId: "1:255447420234:web:239252de5c77a2c62cc5b3"
+    };
+
+    // Inicializar Firebase
+    const app = firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+  </script>
+</head>
+<body>
+  <div class="login">
+    <h1>Iniciar Seccion</h1>
+    <form id="loginForm">
+      <input type="text" id="loginUsername" placeholder="Correo Electronico" required="required" />
+      <input type="password" id="loginPassword" placeholder="Contraseña" required="required" />
+      <button type="submit" class="btn btn-primary btn-block btn-large">V</button>
+    </form>
+
+    <h1>Registrarse</h1>
+    <form id="registerForm">
+      <input type="text" id="registerUsername" placeholder="Correo Electronico" required="required" />
+      <input type="password" id="registerPassword" placeholder="Contraseña" required="required" />
+      <button type="submit" class="btn btn-primary btn-block btn-large">V</button>
+    </form>
+  </div>
+
+  <script>
+    // Iniciar sesión con Firebase
+    document.getElementById('loginForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const email = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // Sesión iniciada correctamente
+          alert('Login successful');
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    });
+
+    // Registrar nuevo usuario con Firebase
+    document.getElementById('registerForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      const email = document.getElementById('registerUsername').value;
+      const password = document.getElementById('registerPassword').value;
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          // Usuario registrado correctamente
+          alert('Registration successful');
+        })
+        .catch((error) => {
+          alert(error.message);
+        });
+    });
+  </script>
+</body>
+</html>
