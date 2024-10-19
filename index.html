@@ -31,54 +31,71 @@
     // Inicializar Firebase
     const app = firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
+
+    // Verificar si ya hay una sesión activa
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        // Usuario ya está autenticado, redirigir a la página del slot
+        console.log("Usuario ya autenticado, redirigiendo...");
+        window.location.href = 'https://chamidev.github.io/Slot/21/';
+      }
+    });
   </script>
 </head>
 <body>
   <div class="login">
-    <h1>Iniciar Seccion</h1>
+    <h1>Iniciar Sesión</h1>
     <form id="loginForm">
-      <input type="text" id="loginUsername" placeholder="Correo Electronico" required="required" />
+      <input type="email" id="loginUsername" placeholder="Correo Electrónico" required="required" />
       <input type="password" id="loginPassword" placeholder="Contraseña" required="required" />
-      <button type="submit" class="btn btn-primary btn-block btn-large">V</button>
+      <button type="submit" class="btn btn-primary btn-block btn-large">Iniciar sesión</button>
     </form>
 
     <h1>Registrarse</h1>
     <form id="registerForm">
-      <input type="text" id="registerUsername" placeholder="Correo Electronico" required="required" />
+      <input type="email" id="registerUsername" placeholder="Correo Electrónico" required="required" />
       <input type="password" id="registerPassword" placeholder="Contraseña" required="required" />
-      <button type="submit" class="btn btn-primary btn-block btn-large">V</button>
+      <button type="submit" class="btn btn-primary btn-block btn-large">Registrarse</button>
     </form>
   </div>
 
   <script>
-    // Iniciar sesión con Firebase
+    // Manejar inicio de sesión
     document.getElementById('loginForm').addEventListener('submit', function(event) {
-      event.preventDefault();
+      event.preventDefault();  // Prevenir que el formulario se envíe automáticamente
       const email = document.getElementById('loginUsername').value;
       const password = document.getElementById('loginPassword').value;
 
+      console.log('Intentando iniciar sesión con:', email);
+
       auth.signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          // Sesión iniciada correctamente
-          alert('Login successful');
+          // Sesión iniciada correctamente, redirigir
+          console.log('Sesión iniciada correctamente');
+          window.location.href = 'https://chamidev.github.io/Slot/21/';
         })
         .catch((error) => {
+          console.error('Error al iniciar sesión:', error);
           alert(error.message);
         });
     });
 
-    // Registrar nuevo usuario con Firebase
+    // Manejar registro de nuevo usuario
     document.getElementById('registerForm').addEventListener('submit', function(event) {
-      event.preventDefault();
+      event.preventDefault();  // Prevenir que el formulario se envíe automáticamente
       const email = document.getElementById('registerUsername').value;
       const password = document.getElementById('registerPassword').value;
 
+      console.log('Intentando registrar usuario con:', email);
+
       auth.createUserWithEmailAndPassword(email, password)
         .then((userCredential) => {
-          // Usuario registrado correctamente
-          alert('Registration successful');
+          // Usuario registrado correctamente, redirigir
+          console.log('Usuario registrado correctamente');
+          window.location.href = 'https://chamidev.github.io/Slot/21/';
         })
         .catch((error) => {
+          console.error('Error al registrar usuario:', error);
           alert(error.message);
         });
     });
