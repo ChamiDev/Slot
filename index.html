@@ -50,13 +50,6 @@
       <input type="password" id="loginPassword" placeholder="Contraseña" required="required" />
       <button type="submit" class="btn btn-primary btn-block btn-large">Iniciar sesión</button>
     </form>
-
-    <h1>Registrarse</h1>
-    <form id="registerForm">
-      <input type="email" id="registerUsername" placeholder="Correo Electrónico" required="required" />
-      <input type="password" id="registerPassword" placeholder="Contraseña" required="required" />
-      <button type="submit" class="btn btn-primary btn-block btn-large">Registrarse</button>
-    </form>
   </div>
 
   <script>
@@ -76,26 +69,6 @@
         })
         .catch((error) => {
           console.error('Error al iniciar sesión:', error);
-          alert(error.message);
-        });
-    });
-
-    // Manejar registro de nuevo usuario
-    document.getElementById('registerForm').addEventListener('submit', function(event) {
-      event.preventDefault();  // Prevenir que el formulario se envíe automáticamente
-      const email = document.getElementById('registerUsername').value;
-      const password = document.getElementById('registerPassword').value;
-
-      console.log('Intentando registrar usuario con:', email);
-
-      auth.createUserWithEmailAndPassword(email, password)
-        .then((userCredential) => {
-          // Usuario registrado correctamente, redirigir
-          console.log('Usuario registrado correctamente');
-          window.location.href = 'https://chamidev.github.io/Slot/21/';
-        })
-        .catch((error) => {
-          console.error('Error al registrar usuario:', error);
           alert(error.message);
         });
     });
